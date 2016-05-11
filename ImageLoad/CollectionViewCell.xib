@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="gTV-IL-0wX" customClass="CollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="155" height="160"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="155" height="160"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6ZY-3V-gWY">
+                        <rect key="frame" x="0.0" y="0.0" width="155" height="160"/>
+                        <color key="backgroundColor" name="keyboardFocusIndicatorColor" catalog="System" colorSpace="catalog"/>
+                    </imageView>
+                    <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YLs-wZ-1dv">
+                        <rect key="frame" x="0.0" y="0.0" width="155" height="160"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZE-tv-feq">
+                                <rect key="frame" x="45" y="41" width="64" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="75v-4c-DCt">
+                                <rect key="frame" x="8" y="83" width="139" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstItem="6ZY-3V-gWY" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="6xC-Uw-O3O"/>
+                <constraint firstAttribute="bottom" secondItem="6ZY-3V-gWY" secondAttribute="bottom" id="Yfj-0l-6uE"/>
+                <constraint firstAttribute="trailing" secondItem="6ZY-3V-gWY" secondAttribute="trailing" id="ZLl-Xk-25M"/>
+                <constraint firstItem="6ZY-3V-gWY" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="dAc-2j-J7T"/>
+            </constraints>
+            <size key="customSize" width="155" height="155"/>
+            <connections>
+                <outlet property="backSideView" destination="YLs-wZ-1dv" id="st1-bO-8pm"/>
+                <outlet property="imageNameLbl" destination="75v-4c-DCt" id="m8B-1n-LV9"/>
+                <outlet property="imageView" destination="6ZY-3V-gWY" id="faC-Gq-mnR"/>
+            </connections>
+            <point key="canvasLocation" x="532.5" y="373"/>
+        </collectionViewCell>
+    </objects>
+</document>
