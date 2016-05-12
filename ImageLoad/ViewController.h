@@ -11,6 +11,7 @@
 @interface ViewController : UIViewController<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 {
     IBOutlet UICollectionView *collectionViewImage;
+    NSCache *_imageCache;
 }
 
 @end

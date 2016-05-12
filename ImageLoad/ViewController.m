@@ -21,6 +21,7 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [collectionViewImage registerNib:[UINib nibWithNibName:@"CollectionViewCell" bundle:nil] forCellWithReuseIdentifier:reuseIdentifier];
+    _imageCache = [[NSCache alloc]init];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -78,25 +79,61 @@ static NSString * const reuseIdentifier = @"Cell";
     
     CollectionViewCell *cell = (CollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     
+    CGRect finalCellFrame = cell.frame;
     
     NSURL *url = [NSURL URLWithString:urlString];
     
-    [self downloadImageWithURL:url completionBlock:^(BOOL succeeded, NSData *data) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if ([collectionViewImage.indexPathsForVisibleItems containsObject:indexPath]) {
-            if (succeeded) {
-                cell.imageView.image = [[UIImage alloc] initWithData:data];
-                cell.imageNameLbl.text = [[urlString lastPathComponent] stringByDeletingPathExtension];
-            }
-            }
-        });
-        
+    CGPoint translation = [collectionView.panGestureRecognizer translationInView:collectionView.superview];
+    if (translation.x > 0) {
+        cell.frame = CGRectMake(finalCellFrame.origin.x - 1000, - 500.0f, 0, 0);
+    } else {
+        cell.frame = CGRectMake(finalCellFrame.origin.x + 1000, - 500.0f, 0, 0);
+    }
+    
+    [UIView animateWithDuration:0.5f animations:^(void){
+        cell.frame = finalCellFrame;
     }];
+    
+    [UIView transitionWithView:cell.contentView
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionFlipFromRight
+                    animations:^{
+                        cell.isRed = YES;
+                        cell.backSideView.hidden=YES;
+                        cell.imageView.hidden = NO;
+                        
+                    } completion:nil];
+    
+    UIImage *image = [_imageCache objectForKey:urlString];
+    
+    if (image)
+    {
+        // if we have an cachedImage sitting in memory already, then use it
+        cell.imageView.image = image;
+        NSLog(@"Cached");
+    }
+    else
+    {
+        NSLog(@"Not cached");
+        [self downloadImageWithURL:url completionBlock:^(BOOL succeeded, NSData *data) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if ([collectionViewImage.indexPathsForVisibleItems containsObject:indexPath]) {
+                    if (succeeded) {
+                        cell.imageView.image = [[UIImage alloc] initWithData:data];
+                        cell.imageNameLbl.text = [[[url absoluteString] lastPathComponent] stringByDeletingPathExtension];
+                    }
+                }
+            });
+            
+            [_imageCache setObject:[UIImage imageWithData:data] forKey:[url absoluteString]];
+            
+        }];
+        
+    }
     
     return cell;
     
 }
-
 
 
 - (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, NSData *data))completionBlock
