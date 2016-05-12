@@ -42,7 +42,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     
-    return 30;
+    return 150;
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -94,15 +94,15 @@ static NSString * const reuseIdentifier = @"Cell";
         cell.frame = finalCellFrame;
     }];
     
-    [UIView transitionWithView:cell.contentView
-                      duration:0.5
-                       options:UIViewAnimationOptionTransitionFlipFromRight
-                    animations:^{
-                        cell.isRed = YES;
-                        cell.backSideView.hidden=YES;
-                        cell.imageView.hidden = NO;
-                        
-                    } completion:nil];
+//    [UIView transitionWithView:cell.contentView
+//                      duration:0.5
+//                       options:UIViewAnimationOptionTransitionFlipFromRight
+//                    animations:^{
+//                        cell.isRed = YES;
+//                        cell.backSideView.hidden=YES;
+//                        cell.imageView.hidden = NO;
+//                        
+//                    } completion:nil];
     
     UIImage *image = [_imageCache objectForKey:urlString];
     
